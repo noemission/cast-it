@@ -1,0 +1,42 @@
+@keyframes mymove {
+    0% {
+        box-shadow: inset 0px 20px 0px -10px #f86c43;
+    }
+
+    25% {
+        box-shadow: inset 20px 0px 0px -10px #f86c43;
+    }
+
+    50% {
+        box-shadow: inset 0px -20px 0px -10px #f86c43;
+    }
+
+    75% {
+        box-shadow: inset -20px 0px 0px -10px #f86c43;
+    }
+
+    100% {
+        box-shadow: inset 0px 20px 0px -10px #f86c43;
+    }
+}
+
+#ninja {
+    animation: mymove .7s infinite linear;
+    transform: rotate3d(1, 0, 0, 1110deg);
+    border-radius: 100%;
+    border-color: transparent;
+    width: 600px;
+    transform: scale(0.9);
+}
+
+#ninja-wrapper {
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    justify-content: center;
+}
+
+body {
+    margin: 0;
+    overflow: hidden;
+}

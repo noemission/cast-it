@@ -1,0 +1,9 @@
+.image-wrapper{
+    display: flex;
+    transition: transform .5s;
+}
+.img{
+    max-height: 40vh;
+    object-fit: cover;
+    flex-shrink: 0;
+}

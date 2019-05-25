@@ -1,0 +1,41 @@
+.progress-wrapper{
+    display: flex;
+    align-items: center;
+}
+#progress-bar-wrapper{
+    flex: 1;
+    margin: 0 2em !important;
+    height: 9px;
+    cursor: pointer;
+}
+#progress-bar-wrapper .label{
+    transition: opacity .3s linear;
+}
+#progress-bar-wrapper .bar{
+    height: 100%;
+    background: #03A9F4 ;
+    transition: all .3s linear !important;
+    box-shadow: 0 0 0px 0px black;
+}
+#progress-bar-wrapper .bar::after{
+    content: '';
+    width: 14px;
+    height: 14px;
+    border: 1px double;
+    border-radius: 100%;
+    position: absolute;
+    right: -5px;
+    top: -3.3px;
+    background: white;
+    transition: all .3s;
+    border-color: white;
+    box-shadow: 0px 0px 2px 0px #000000bd;
+}
+
+#progress-bar-wrapper:hover .bar{
+    box-shadow: 0 0 2px 0px black;
+}
+
+#progress-bar-wrapper:hover .bar::after{
+    box-shadow: 0px 0px 5px 0px #000000bd;
+}

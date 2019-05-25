@@ -1,0 +1,7 @@
+#remove-button{
+    box-shadow: none !important;
+    text-align: start;
+    padding-left: 0;
+    width: 70px;
+    margin-left: 1em;
+}

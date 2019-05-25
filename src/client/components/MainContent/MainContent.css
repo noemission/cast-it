@@ -1,0 +1,11 @@
+#main-content{
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+}
+#loader::before{
+    border-color: rgba(239, 98, 98, 0.15);
+}
+#loader::after{
+    border-color: #f76767 transparent transparent;
+}

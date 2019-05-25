@@ -1,0 +1,47 @@
+#file_chooser_wrapper{
+    flex-grow: 1;
+    display: flex;
+}
+#file_chooser{
+    flex-grow: 1;
+}
+#file_chooser.dropping{
+    border: none;
+    border-radius: 0;
+}
+#file_chooser.dropping *{
+    pointer-events: none;
+}
+#drag_drop_img{
+    margin-bottom: 0.5em
+}
+#divider{
+    margin: 1em 0;
+}
+#file_input{
+    display: none;
+}
+
+#arrow_icon.animating{
+    animation: UpAndDown .2s linear infinite alternate-reverse;
+}
+
+@keyframes UpAndDown {
+    from {
+        transform: translateY(-4%);
+    }
+  
+    to {
+        transform: translateY(4%);
+    }
+  }
+
+.sutitle-item .remove{
+    width: 0;
+    padding: 0 !important;
+}
+.sutitle-item:hover .remove{
+    transition: padding linear .2s;
+    width: unset;
+    padding: 0 0.6em !important;
+}

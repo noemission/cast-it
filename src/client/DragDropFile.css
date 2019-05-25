@@ -1,0 +1,12 @@
+#drop_zone{
+    padding: 1em;
+    text-align: center;
+    border: 1px solid;
+    border-style: dashed;
+    transition: all .3s;
+}
+#drop_zone.dropping{
+    padding: 1.5em;
+    border-color: blue;
+    background: aliceblue;
+}
