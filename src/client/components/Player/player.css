@@ -1,0 +1,25 @@
+#player{
+    justify-content: center;
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+    margin-top: 0;
+}
+#player #volume-range {
+    transition: all .3s;
+    transform-origin: left;
+    margin-left: -3px;
+    transform: scaleX(0);
+    position: absolute;
+    margin-left: 38px;
+    height: 35px;
+    outline: 1px solid #e0e1e2;
+}
+#player #volume-range.show {
+    transform: scaleX(1);    
+}
+#player .volume-wrapper{
+    display: flex;
+    align-items: center;
+    width: 38.5px;
+}

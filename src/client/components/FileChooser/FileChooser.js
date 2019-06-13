@@ -76,6 +76,12 @@ class FileChooser extends Component {
             this.setState({ dropping: false })
         }
     }
+    urlPopUp = () => {
+        let url = window.prompt();
+        if(url){
+            this.props.setFiles(url)
+        }
+    }
     render() {
         const { dropping } = this.state
         return <div id="file_chooser_wrapper"  >
@@ -87,7 +93,7 @@ class FileChooser extends Component {
                 onDragOver={this.dragOverHandler}
                 onDragEnter={this.dragEnterHandler}
                 onDragLeave={this.dragLeaveHandler}>
-                <Grid columns={1} stackable stretched textAlign='center'>
+                <Grid columns="2" stackable stretched textAlign='center'>
                     <Grid.Row verticalAlign='middle'>
                         <Grid.Column>
                             <Header>
@@ -95,13 +101,18 @@ class FileChooser extends Component {
                                 <p>Drag & Drop</p>
                             </Header>
                         </Grid.Column>
-
+                    </Grid.Row>
+                    <Grid.Row columns="1">
                         <Grid.Column style={{ margin: '5% 0' }}>
                             <Divider id="divider" horizontal>Or</Divider>
                         </Grid.Column>
-
+                    </Grid.Row>
+                    <Grid.Row>
+                        <Grid.Column >
+                            <FileButton text="Add video" onFile={this.props.setFiles} />
+                        </Grid.Column>
                         <Grid.Column>
-                            <FileButton text="Select files" onFile={this.props.setFiles} />
+                            <Button onClick={this.urlPopUp} primary>Add URL</Button>
                         </Grid.Column>
                     </Grid.Row>
                 </Grid>

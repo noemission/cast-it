@@ -3,11 +3,12 @@ import { connect } from 'react-redux';
 import mediaServer from "../../../server/mediaServer";
 import mediaServerProxy from "../../../server/mediaServerProxy";
 import Progress from "./components/Progress/Progress";
-import { Segment } from "semantic-ui-react";
+import { Segment, Button, Grid, Transition } from "semantic-ui-react";
 import slugify from "@sindresorhus/slugify";
+import "./player.css";
 
 class Player extends Component {
-    state = { status: {} }
+    state = { status: {}, showVolRange: false }
     constructor() {
         super();
         this.progressWrapper = React.createRef();
@@ -26,18 +27,7 @@ class Player extends Component {
         })
         console.log(`http://${serverDetails.hostname}:${serverDetails.port}`)
         player.play(
-            // 'http://192.168.1.4:1339/video',
             `http://${serverDetails.hostname}:${serverDetails.port}`,
-            // {
-            //     // autoplay: true,
-            //     contentType: 'video/mp4',
-            //     metadata: {
-            //         title: "Avengers",
-            //         creator: 'John Doe',
-            //         type: 'video', // can be 'video', 'audio' or 'image'
-            //         // subtitlesUrl: 'http://url.to.some/subtitles.srt'
-            //     }
-            // },
             {
                 autoplay: true,
                 type: 'video/mp4',
@@ -63,11 +53,10 @@ class Player extends Component {
     initHandlers = () => {
         const { player, selectedFile: { metaData } } = this.props;
 
-        player.client.getDuration((err, duration) => this.setState({ duration : duration || metaData.format.duration }))
+        player.client.getDuration((err, duration) => this.setState({ duration: duration || metaData.format.duration }))
 
         setInterval(() => {
             player.status((err, status) => {
-                // console.log('status', status)
                 if (status.playerState === "PLAYING") {
                     this.setState({
                         status: {
@@ -121,30 +110,39 @@ class Player extends Component {
         const { player } = this.props;
         player.seek(parseInt(seconds))
     }
-
+    onVolBtnHover = (e) => {
+        this.setState({
+            showVolRange: true
+        })
+        console.log('in')
+    }
+    onVolBtnHoverOut = (e) => {
+        this.setState({
+            showVolRange: false
+        })
+        console.log('out')
+    }
     render() {
         const { player } = this.props;
-        const { status, duration } = this.state;
+        const { status, duration, showVolRange } = this.state;
 
-        return <Segment loading={!this.state.isPlaying}>
-            <br /><br />
-            <pre>{JSON.stringify(this.state.status, null, 4)}</pre>
-            <br /><br />
-            <button onClick={this.resume}>Play</button>
-            <button onClick={this.pause}>Pause</button>
-            <button onClick={this.stop}>Stop</button>
-
-            <br /><br />
-            <div>
-                <input type="range" id="start" name="volume"
-                    value={status.volume * 100}
-                    onChange={e => this.setVolume(e.target.value)}
-                    min="0" max="15" />
-                <label htmlFor="volume">Volume - {status.volume * 100 | 0}</label>
-            </div>
-
-            <br /><br />
+        return <Segment  id="player" loading={!this.state.isPlaying}>
             <Progress onSeek={this.seek} currentTime={status.currentTime} duration={duration} />
+            <Grid centered>
+                <Grid.Row >
+                    <Button icon='play' onClick={this.resume} />
+                    <Button icon='pause' onClick={this.pause} />
+                    <Button icon='stop' onClick={this.stop} />
+                    <div onMouseLeave={this.onVolBtnHoverOut} className="volume-wrapper">
+                        <Button onMouseEnter={this.onVolBtnHover} icon='volume up' onClick={this.stop} />
+                        <input type="range" id="volume-range" name="volume" className={`${showVolRange ? 'show' : ''}`}
+                            value={status.volume * 100}
+                            onChange={e => this.setVolume(e.target.value)}
+                            min="0" max="15" />
+                    </div>
+                </Grid.Row>
+            </Grid>
+
         </Segment>
 
 
@@ -154,22 +152,4 @@ class Player extends Component {
 export default connect(state => ({
     selectedFile: state.mediaFiles.video,
     externalSubtitles: state.mediaFiles.subtitles,
-}),
-    // ({ steps, dlnaClients }) => ({
-    //     goToStep1: () => {
-    //         steps.setActive(1);
-    //         dlnaClients.stopSearching()
-    //     },
-    //     goToStep2: () => {
-    //         steps.setCompleted(1);
-    //         steps.setActive(2);
-    //         dlnaClients.startSearching()
-    //     },
-    //     goToStep3: () => {
-    //         steps.setCompleted(2);
-    //         steps.setActive(3);
-    //         dlnaClients.stopSearching()
-    //     },
-    // })
-
-)(Player)
+}))(Player)
