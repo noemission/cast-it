@@ -50,7 +50,7 @@
     "ansi-to-html": "^0.6.9",
     "charset-detector": "0.0.2",
     "dlnacasts2": "^0.1.2",
-    "file-type": "^10.7.1",
+    "file-type": "^16.5.4",
     "fluent-ffmpeg": "^2.1.2",
     "franc": "^4.0.0",
     "get-port": "^4.1.0",
